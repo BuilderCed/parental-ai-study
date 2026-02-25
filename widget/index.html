@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Interview RESPIRE — Organisation Familiale</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8f7f4;
+      color: #2d2d2d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .info-box {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      text-align: left;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .info-box strong { color: #4a90d9; }
+    .widget-container {
+      margin: 2rem auto;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .error {
+      background: #fee;
+      border: 1px solid #fcc;
+      border-radius: 8px;
+      padding: 1rem;
+      color: #c33;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Etude sur l'Organisation Familiale</h1>
+    <p class="subtitle">
+      Merci de participer ! Vous allez echanger avec Camille, une chercheuse virtuelle.
+      La conversation dure environ 15 minutes. Tout est confidentiel.
+    </p>
+
+    <div class="info-box">
+      <strong>Comment ca marche :</strong><br>
+      1. Cliquez sur le bouton en bas a droite pour demarrer<br>
+      2. Autorisez l'acces au microphone<br>
+      3. Parlez naturellement — il n'y a pas de bonne ou mauvaise reponse<br>
+      4. Vous pouvez arreter a tout moment
+    </div>
+
+    <div id="error-box" class="error">
+      Lien invalide. Contactez le chercheur pour obtenir un nouveau lien.
+    </div>
+
+    <div id="widget-container" class="widget-container"></div>
+
+    <p class="footer">
+      En participant, vous consentez au traitement de vos reponses vocales
+      a des fins de recherche academique (base legale : consentement, Art. 6(1)(a) RGPD).
+      Donnees pseudonymisees, retention 30 jours, puis suppression.
+      Contact : respire.study@proton.me
+    </p>
+  </div>
+
+  <script>
+    const AGENT_ID = 'agent_4301kj6mtc0debes0xew21d3yyhw';
+
+    const params = new URLSearchParams(window.location.search);
+    const participant = params.get('participant') || params.get('p') || '';
+    const name = params.get('name') || params.get('n') || '';
+    const nonce = params.get('nonce') || '';
+
+    if (!participant) {
+      document.getElementById('error-box').style.display = 'block';
+    } else {
+      const widget = document.createElement('elevenlabs-convai');
+      widget.setAttribute('agent-id', AGENT_ID);
+
+      const dynamicVars = { user_id: participant };
+      if (name) dynamicVars.prenom = name;
+      if (nonce) dynamicVars.session_nonce = nonce;
+      widget.setAttribute('dynamic-variables', JSON.stringify(dynamicVars));
+
+      document.getElementById('widget-container').appendChild(widget);
+
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>
