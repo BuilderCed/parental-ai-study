@@ -21,7 +21,7 @@ for _var in ["ALL_PROXY", "all_proxy", "HTTPS_PROXY", "HTTP_PROXY",
 from elevenlabs.client import ElevenLabs
 
 AGENT_ID = "agent_4301kj6mtc0debes0xew21d3yyhw"
-DEFAULT_WIDGET_URL = "https://BuilderCed.github.io/parental-ai-study/widget/"
+DEFAULT_WIDGET_URL = "https://builderced.github.io/parental-ai-study/widget/"
 
 
 def check_widget_url(url: str) -> bool:

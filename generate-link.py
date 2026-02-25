@@ -28,7 +28,7 @@ for _var in ["ALL_PROXY", "all_proxy", "HTTPS_PROXY", "HTTP_PROXY",
 AGENT_ID = "agent_4301kj6mtc0debes0xew21d3yyhw"
 WIDGET_BASE_URL = os.environ.get(
     "RESPIRE_WIDGET_URL",
-    "https://BuilderCed.github.io/parental-ai-study/widget/"
+    "https://builderced.github.io/parental-ai-study/widget/"
 )
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 LINKS_FILE = os.path.join(DATA_DIR, "participant-links.json")
