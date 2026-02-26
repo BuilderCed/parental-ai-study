@@ -9,9 +9,12 @@ Usage:
 """
 
 import os
+import ssl
 import sys
 import urllib.request
 import urllib.error
+
+import certifi
 
 # Clean proxy env vars that cause SOCKS errors with httpx
 for _var in ["ALL_PROXY", "all_proxy", "HTTPS_PROXY", "HTTP_PROXY",
@@ -19,6 +22,9 @@ for _var in ["ALL_PROXY", "all_proxy", "HTTPS_PROXY", "HTTP_PROXY",
     os.environ.pop(_var, None)
 
 from elevenlabs.client import ElevenLabs
+
+# SSL context using certifi (fixes macOS Python cert issues)
+SSL_CTX = ssl.create_default_context(cafile=certifi.where())
 
 AGENT_ID = "agent_4301kj6mtc0debes0xew21d3yyhw"
 DEFAULT_WIDGET_URL = "https://builderced.github.io/parental-ai-study/widget/"
@@ -29,7 +35,7 @@ def check_widget_url(url: str) -> bool:
     try:
         req = urllib.request.Request(url, method="GET")
         req.add_header("User-Agent", "RESPIRE-Verify/1.0")
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        with urllib.request.urlopen(req, timeout=10, context=SSL_CTX) as resp:
             body = resp.read().decode("utf-8", errors="replace")
             if "elevenlabs-convai" in body or "AGENT_ID" in body:
                 return True
