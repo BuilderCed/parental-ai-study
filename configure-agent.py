@@ -35,7 +35,7 @@ client.conversational_ai.agents.update(
         },
         "tts": {
             "model_id": "eleven_turbo_v2_5",
-            "voice_id": "EXAVITQu4vr4xnSDxMaL",
+            "voice_id": "d3AXX0BlgJHYFCuH9X88",  # Emilie - French (France) podcast host
             "stability": 0.5,
             "similarity_boost": 0.8,
             "optimize_streaming_latency": 3,
