@@ -1,0 +1,14 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  ci:
+    uses: BuilderCed/.github/.github/workflows/reusable-ci-static.yml@main
+    with:
+      node-version: '22'
+      has-tests: false
+    permissions:
+      contents: read
