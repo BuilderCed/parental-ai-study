@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Data (participant PII)
+data/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
